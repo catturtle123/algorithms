@@ -36,26 +36,30 @@ int main(){
     freopen("input.txt", "r", stdin);
 #endif
 
-    int n, result = 0;
-    vector<int> routes;
-    vector<int> nodes;
+    int n;
+    ll result = 0;
+    ll routes[100002];
+    ll nodes[100002];
 
     cin >> n;
-    routes.resize(n - 1);
-    nodes.resize(n);
+    memset(routes, 0, sizeof(int) * 100002);
+    memset(nodes, 0, sizeof(int) * 100002);
 
     rep(i, 0, n - 1) cin >> routes[i];
     rep(i, 0, n) cin >> nodes[i];
-
-    result += routes[0] * nodes[0];
-    REP (i, 1, n) {
+    
+         
+    REP (i, 0, n) {
         result += routes[i] * nodes[i];
         if (nodes[i] < nodes[i + 1]) {
             nodes[i + 1] = nodes[i];
         }
+
     }
 
     cout << result;
+    
+   
 
 
 #ifndef ONLINE_JUDGE
