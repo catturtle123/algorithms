@@ -10,6 +10,9 @@ def bfs(start):
     while queue:
         pos, length = queue.popleft()
 
+        if pos == k:
+            break
+
         if 0 <= pos + 1 <= 100_000:
             if dp[pos + 1] == INF:
                 dp[pos + 1] = min(dp[pos + 1], length + 1)
