@@ -1,58 +1,14 @@
-num = int(input())
+t = int(input())
 
-a,b = 0,0
+dp = [[0, 0] for _ in range(41)]
 
-def fibo1(n):
-    global a,b
-    if n == 0:
-        a += 1
-        return 0
-    elif n == 1:
-        b += 1 
-        return 1
-    elif n == 2:
-        a += 1
-        b += 1
-        return -1
-    elif n == 3:
-        a += 1 
-        b += 2
-        return -1
-    elif n == 4:
-        a += 2
-        b += 3
-        return -1
-    elif n == 5:
-        a += 3
-        b += 5
-        return -1
-    elif n == 6:
-        a += 5
-        b += 8
-        return -1
-    elif n == 7:
-        a += 8
-        b += 13
-        return -1
-    elif n == 22:
-        a += 10946
-        b += 17711
-        return -1
-    elif n == 30:
-        a += 514229
-        b += 832040
-        return -1
-    elif n == 35:
-        a += 5702887
-        b += 9227465
-        return -1
-    elif n >= 0:
-        return fibo1(n-1) + fibo1(n-2)
+dp[0][0] = 1
+dp[1][1] = 1
 
+for i in range(2, 41):
+    dp[i][0] = dp[i - 1][0] + dp[i - 2][0]
+    dp[i][1] = dp[i - 1][1] + dp[i - 2][1]
 
-for i in range(num):
+for i in range(t):
     n = int(input())
-    fibo1(n)
-    print(a,b)
-    a = 0
-    b = 0
+    print(f"{dp[n][0]} {dp[n][1]}")
