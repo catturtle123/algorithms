@@ -1,26 +1,9 @@
-n = input()
-nlist = []
-n = str(n)
-for i in n:
-    nlist.append(int(i))
-nlist.sort()
-nlist.reverse()
-n = ""
-for i in nlist:
-    n += str(i)
+s_num = list(map(int, input()))
 
-if n[-1] != "0":
+s_num.sort(reverse=True)
+
+if sum(s_num) % 3 != 0 or s_num[-1] != 0:
     print(-1)
 else:
-    sum = 0
-    for i in n:
-        sum += int(i)
-    if sum % 3 != 0:
-        print(-1)
-    else:
-        n = int(n)
-        if n % 3 != 0:
-            print(-1)
-        else:
-            n = int(n)
-            print(n)
+    for i in s_num:
+        print(i,end="")
