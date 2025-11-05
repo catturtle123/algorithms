@@ -1,25 +1,25 @@
-num,brand = map(int,input().split())
+# 기타줄 N개가 끊어짐
+# 새로운 줄을 사거나 교체해야함
+# 6줄 패키지, 낱개도 가능
+# 끊어진 기타줄(N), 기타줄 브랜드(M)
 
-packageList = []
-aList = []
-for i in range(brand):
-    a,b = map(int,input().split())
-    packageList.append(a)
-    aList.append(b)
+# 브루트포스
+import sys
+input = sys.stdin.readline
 
-packageList.sort()
-aList.sort()
+n, m = map(int, input().split())
 
-packagenum = num // 6
-anum = num % 6
+brands_other = []
+brands_package = []
+for i in range(m):
+    a, b = map(int, input().split())
+    brands_package.append(a)
+    brands_package.append(b * 6)
 
-if num == 0:
-    print(0)
-else:
-    if aList[0] * 6 < packageList[0]:
-        print(aList[0]*num)
-    else:
-        if anum * aList[0] >= packageList[0]:
-            print(packageList[0]*packagenum + packageList[0])
-        else:
-            print(packageList[0]*packagenum + anum * aList[0])
+    brands_other.append(a)
+    brands_other.append(b * (n % 6))
+
+min_brand_package = min(brands_package)
+min_brand_other = min(brands_other)
+
+print(((n // 6) * min_brand_package) + (min_brand_other))
