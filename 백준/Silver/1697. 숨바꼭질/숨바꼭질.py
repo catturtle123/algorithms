@@ -1,38 +1,32 @@
-import sys
 from collections import deque
-input = sys.stdin.readline
-
-INF = sys.maxsize
-
-def bfs(start):
-    queue = deque([start])
-
-    while queue:
-        pos, length = queue.popleft()
-
-        if pos == k:
-            break
-
-        if 0 <= pos + 1 <= 100_000:
-            if dp[pos + 1] == INF:
-                dp[pos + 1] = min(dp[pos + 1], length + 1)
-                queue.append((pos + 1, dp[pos + 1]))
-        
-        if 0 <= pos - 1 <= 100_000:
-            if dp[pos - 1] == INF:
-                dp[pos - 1] = min(dp[pos - 1], length + 1)
-                queue.append((pos - 1, dp[pos - 1]))
-        
-        if 0 <= 2 * pos <= 100_000:
-            if dp[2 * pos] == INF:
-                dp[2 * pos] = min(dp[pos * 2], length + 1)
-                queue.append((2 * pos, dp[2 * pos]))
 
 n, k = map(int, input().split())
 
-dp = [INF] * (100_001)
-dp[n] = 0
+visited = [False] * 200_001
 
-bfs((n, 0))
+def bfs(start):
+    queue = deque(start)
 
-print(dp[k])
+    # 현재 위치, 얼마나 갔는지
+    while queue:
+        current_pos, time = queue.popleft()
+
+        # 만약 해당 위치로 갔다면 print & break
+        if current_pos == k:
+            print(time)
+            break
+        
+        if 0 <= current_pos <= 100_000:
+            if not visited[current_pos - 1]:
+                visited[current_pos - 1] = True
+                queue.append((current_pos - 1, time + 1))
+            
+            if not visited[current_pos + 1]:
+                visited[current_pos + 1] = True
+                queue.append((current_pos + 1, time + 1))
+            
+            if not visited[current_pos * 2]:
+                visited[current_pos * 2] = True
+                queue.append((current_pos * 2, time + 1))
+
+bfs([(n, 0)])
