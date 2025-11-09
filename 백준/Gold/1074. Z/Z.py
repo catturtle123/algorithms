@@ -1,23 +1,21 @@
-import sys
-input = sys.stdin.readline
+n, r, c = map(int, input().split())
 
-N, r, c = map(int, input().split())
-
-def divide_conquer(y, x, n, length):
-    if n == 1:
+def z(y, x, n, length):
+    if n == 0:
         print(length)
-        return
-    
-    half = n // 2
+        return length
 
-    if r < y + half and c < x + half:
-        divide_conquer(y, x, half, length)
-    elif r < y + half and c >= x + half:
-        divide_conquer(y, x + half, half, length + half * half)
-    elif r >= y + half and c < x + half:
-        divide_conquer(y + half, x, half, length + 2 * half * half)
-    else:
-        divide_conquer(y + half, x + half, half, length + 3 * half * half)
+    div = pow(2, n - 1)
+    if r < y + div and c < x + div: # 1 사분면
+        z(y, x, n - 1, length)
 
-N = 2 ** N
-divide_conquer(0, 0, N, 0)
+    elif r < y + div and c >= x + div: # 2 사분면
+        z(y, x + div, n - 1, length + div * div)
+
+    elif r >= y + div and c < x + div: # 3 사분면
+        z(y + div, x, n - 1, length + 2 * div * div)
+
+    elif r >= y + div and c >= x + div: # 4 사분면
+        z(y + div, x + div, n - 1, length + 3 * div * div)
+
+z(0, 0, n, 0)
