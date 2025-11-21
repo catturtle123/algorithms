@@ -9,9 +9,9 @@ def move(i, now):
     if i == 0:
         return now * 2
     elif i == 1:
-        return now + 1
-    elif i == 2:
         return now - 1
+    elif i == 2:
+        return now + 1
 
 def bfs(start, k):
     queue = deque([(start, 0)])
@@ -19,17 +19,17 @@ def bfs(start, k):
     while queue:
         now, time = queue.popleft()
 
+        if now == k:
+            return visited[now]
+
         for i in range(3):
             temp = move(i, now)
-            if 0 <= temp <= 100_000:
-                if i == 0 and visited[temp] > visited[now]:
+            if 0 <= temp <= 100_000 and visited[temp] == INF:
+                if i == 0:
                     visited[temp] = time
                     queue.appendleft((temp, visited[temp]))
                 else:
-                    if visited[temp] > visited[now] + 1:
-                        visited[temp] = time + 1
-                        queue.append((temp, visited[temp]))
-
-    return visited[k]
+                    visited[temp] = time + 1
+                    queue.append((temp, visited[temp]))
 
 print(bfs(n, k))
