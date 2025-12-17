@@ -10,7 +10,7 @@ for _ in range(n):
     num = int(input())
 
     if num == 0:
-        if cnt == 0:
+        if not nlist:
             print(0)
         else:
             print(-(heapq.heappop(nlist)))
