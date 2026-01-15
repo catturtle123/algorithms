@@ -1,7 +1,7 @@
-n1 = input()
-n2 = input()
+s1 = input()
+s2 = input()
 
-if len(n1) >= len(n2):
+if len(s1) >= len(s2):
     print("go")
 else:
     print("no")
