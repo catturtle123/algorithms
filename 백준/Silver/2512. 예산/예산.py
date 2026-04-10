@@ -20,9 +20,7 @@ def binary_search(nlist, x):
                 temp = sum(nlist[:i]) + (mid * len(nlist[i:]))
                 break
         
-        if temp == x:
-            return mid
-        elif temp < x:
+        if temp <= x:
             # 해당 값이 x보다 낮거나 같다면 start = mid + 1
             start = mid + 1
         else:
